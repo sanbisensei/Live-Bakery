@@ -1,0 +1,21 @@
+export default function Footer() {
+  return (
+    <footer className="px-8 py-5 bg-beige flex items-center justify-between font-body text-sm text-cocoa-soft">
+      <span>© Afsana&apos;s Kitchen · Dhaka Uddan, Mohammadpur</span>
+      <div className="flex gap-4">
+        <a
+          href="https://www.facebook.com/cookingkitchenbyafsana/"
+          target="_blank"
+        >
+          Facebook
+        </a>
+        <a
+          href="https://www.youtube.com/@cookingkitchenbyafsana8203"
+          target="_blank"
+        >
+          YouTube
+        </a>
+      </div>
+    </footer>
+  );
+}

@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-:root {
+@theme {
   --color-cream: #fff8f0;
   --color-orange: #f4a95c;
   --color-orange-dark: #e07a45;
@@ -11,8 +11,10 @@
   --color-beige-border: #ecdfc8;
   --color-pistachio: #7c9070;
 
-  --font-display: "Fraunces", serif;
+  --font-display: "Young Serif", serif;
   --font-body: "Karla", sans-serif;
+
+  --radius-pill: 999px;
 }
 
 body {
