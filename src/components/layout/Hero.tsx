@@ -1,0 +1,43 @@
+import Link from "next/link";
+
+export default function Hero() {
+  return (
+    <section className="px-8 py-16 bg-cream">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
+        <div>
+          <p className="font-body text-xs tracking-widest uppercase text-orange-dark mb-3">
+            Home-baked in Mohammadpur
+          </p>
+          <h1 className="font-display text-4xl md:text-5xl text-cocoa leading-tight mb-4">
+            Every slice,
+            <br />
+            made by hand
+          </h1>
+          <p className="font-body text-base text-cocoa-soft mb-6 max-w-sm">
+            Order online, pick your size, and pay when it arrives at your door.
+          </p>
+          <div className="flex gap-3">
+            <Link
+              href="/cakes"
+              className="font-body text-sm font-semibold bg-cocoa text-cream rounded-pill px-6 py-3"
+            >
+              Browse cakes
+            </Link>
+            <Link
+              href="/blog"
+              className="font-body text-sm font-semibold border-2 border-cocoa text-cocoa rounded-pill px-6 py-3"
+            >
+              Read the blog
+            </Link>
+          </div>
+        </div>
+
+        <div className="bg-beige rounded-2xl h-64 md:h-80 flex items-center justify-center">
+          <span className="font-body text-sm text-cocoa-soft">
+            [ hero cake photo ]
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
