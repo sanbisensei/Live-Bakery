@@ -3,11 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-
 export default function Navbar() {
   const [userName, setUserName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function loadUser() {
       const {
@@ -30,9 +28,7 @@ export default function Navbar() {
       }
       setLoading(false);
     }
-
     loadUser();
-
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
       loadUser();
     });
@@ -44,7 +40,6 @@ export default function Navbar() {
     await supabase.auth.signOut();
     window.location.href = "/";
   }
-
   return (
     <header className="flex items-center justify-between px-8 py-4 bg-cream border-b border-beige-border">
       <Link href="/" className="font-display text-xl font-semibold text-cocoa">
@@ -57,7 +52,6 @@ export default function Navbar() {
         <Link href="/reviews">Reviews</Link>
         <Link href="/custom-cake">Custom cake</Link>
       </nav>
-
       <div className="flex gap-3 items-center">
         {loading ? null : userName ? (
           <>
