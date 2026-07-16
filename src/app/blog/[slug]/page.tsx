@@ -1,15 +1,16 @@
-import { BlogRepository } from "@/lib/repositories/blogRepository"
-import { notFound } from "next/navigation"
-import Link from "next/link"
+import { BlogRepository } from "@/lib/repositories/blogRepository";
+import { notFound } from "next/navigation";
+import Link from "next/link";
 
 type Props = {
-  params: { slug: string }
-}
+  params: Promise<{ slug: string }>;
+};
 
 export default async function BlogPostPage({ params }: Props) {
-  const { data: post, error } = await BlogRepository.getBySlug(params.slug)
+  const { slug } = await params;
+  const { data: post, error } = await BlogRepository.getBySlug(slug);
 
-  if (error || !post) return notFound()
+  if (error || !post) return notFound();
 
   const formattedDate = post.published_at
     ? new Date(post.published_at).toLocaleDateString("en-BD", {
@@ -17,16 +18,19 @@ export default async function BlogPostPage({ params }: Props) {
         month: "long",
         day: "numeric",
       })
-    : null
+    : null;
 
   return (
     <div className="max-w-3xl mx-auto px-8 py-10">
-
       {/* Breadcrumb */}
       <p className="font-body text-xs text-cocoa-soft mb-6">
-        <Link href="/" className="hover:text-cocoa">Home</Link>
+        <Link href="/" className="hover:text-cocoa">
+          Home
+        </Link>
         {" › "}
-        <Link href="/blog" className="hover:text-cocoa">Blog</Link>
+        <Link href="/blog" className="hover:text-cocoa">
+          Blog
+        </Link>
         {" › "}
         {post.title}
       </p>
@@ -37,7 +41,9 @@ export default async function BlogPostPage({ params }: Props) {
           {post.tag}
         </span>
         {formattedDate && (
-          <span className="font-body text-xs text-cocoa-soft">{formattedDate}</span>
+          <span className="font-body text-xs text-cocoa-soft">
+            {formattedDate}
+          </span>
         )}
       </div>
 
@@ -62,7 +68,9 @@ export default async function BlogPostPage({ params }: Props) {
         />
       ) : (
         <div className="w-full h-64 bg-beige rounded-2xl flex items-center justify-center mb-8">
-          <span className="font-body text-sm text-cocoa-soft">[ cover image ]</span>
+          <span className="font-body text-sm text-cocoa-soft">
+            [ cover image ]
+          </span>
         </div>
       )}
 
@@ -80,7 +88,6 @@ export default async function BlogPostPage({ params }: Props) {
           ← Back to blog
         </Link>
       </div>
-
     </div>
-  )
+  );
 }

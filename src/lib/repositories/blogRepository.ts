@@ -12,13 +12,25 @@ export const BlogRepository = {
   },
 
   async getBySlug(slug: string) {
+    console.log("Looking up slug:", JSON.stringify(slug));
     const { data, error } = await supabase
       .from("blog_posts")
       .select("*, profiles(full_name)")
       .eq("slug", slug)
       .eq("is_published", true)
       .single();
-
+    console.log("Result data:", data, "Result error:", error);
     return { data, error };
   },
+
+  // async getBySlug(slug: string) {
+  //   const { data, error } = await supabase
+  //     .from("blog_posts")
+  //     .select("*, profiles(full_name)")
+  //     .eq("slug", slug)
+  //     .eq("is_published", true)
+  //     .single();
+
+  //   return { data, error };
+  // },
 };
