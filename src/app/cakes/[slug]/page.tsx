@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import { CakeRepository } from "@/lib/repositories/cakeRepository";
 import AddToOrderButton from "@/components/ui/AddToOrderButton";
 import SizeSelector from "@/components/ui/SizeSelector";
@@ -23,10 +21,8 @@ export default async function CakeDetailPage({ params }: Props) {
   const averageRating =
     cake.reviews?.length > 0
       ? (
-          cake.reviews.reduce(
-            (sum: number, r: { rating: number }) => sum + r.rating,
-            0,
-          ) / cake.reviews.length
+          cake.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) /
+          cake.reviews.length
         ).toFixed(1)
       : null;
 
@@ -34,13 +30,13 @@ export default async function CakeDetailPage({ params }: Props) {
     <div className="max-w-6xl mx-auto px-8 py-10">
       {/* Breadcrumb */}
       <p className="font-body text-xs text-cocoa-soft mb-6">
-        <Link href="/" className="hover:text-cocoa">
+        <a href="/" className="hover:text-cocoa">
           Home
-        </Link>
+        </a>
         {" › "}
-        <Link href="/cakes" className="hover:text-cocoa">
+        <a href="/cakes" className="hover:text-cocoa">
           Cakes
-        </Link>
+        </a>
         {" › "}
         {cake.name}
       </p>
@@ -48,13 +44,11 @@ export default async function CakeDetailPage({ params }: Props) {
       {/* Main 2-col layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-14">
         {/* Left: image */}
-        <div className="bg-beige rounded-2xl h-72 md:h-96 flex items-center justify-center overflow-hidden">
+        <div className="bg-beige rounded-2xl h-72 md:h-96 flex items-center justify-center">
           {cake.cake_images?.[0]?.url ? (
-            <Image
+            <img
               src={cake.cake_images[0].url}
               alt={cake.name}
-              width={400}
-              height={384}
               className="w-full h-full object-cover rounded-2xl"
             />
           ) : (
