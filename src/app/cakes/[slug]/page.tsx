@@ -5,7 +5,7 @@ import ReviewSection from "@/components/ui/ReviewSection";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-//using nextjs 15
+//using nextjs 15 and sing page is done for local host
 type Props = {
   params: Promise<{ slug: string }>;
 };
