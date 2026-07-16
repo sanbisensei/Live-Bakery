@@ -1,15 +1,17 @@
 import { CakeRepository } from "@/lib/repositories/cakeRepository";
 import AddToOrderButton from "@/components/ui/AddToOrderButton";
-import SizeSelector from "@/components/ui/SizeSelector";
+import SizeSelector from "@/components/ui/sizeSelector";
 import ReviewSection from "@/components/ui/ReviewSection";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export default async function CakeDetailPage({ params }: Props) {
-  const { data: cake, error } = await CakeRepository.getBySlug(params.slug);
+  const { slug } = await params;
+  const { data: cake, error } = await CakeRepository.getBySlug(slug);
 
   if (error || !cake) return notFound();
 
@@ -21,8 +23,10 @@ export default async function CakeDetailPage({ params }: Props) {
   const averageRating =
     cake.reviews?.length > 0
       ? (
-          cake.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) /
-          cake.reviews.length
+          cake.reviews.reduce(
+            (sum: number, r: { rating: number }) => sum + r.rating,
+            0,
+          ) / cake.reviews.length
         ).toFixed(1)
       : null;
 
@@ -30,13 +34,13 @@ export default async function CakeDetailPage({ params }: Props) {
     <div className="max-w-6xl mx-auto px-8 py-10">
       {/* Breadcrumb */}
       <p className="font-body text-xs text-cocoa-soft mb-6">
-        <a href="/" className="hover:text-cocoa">
+        <Link href="/" className="hover:text-cocoa">
           Home
-        </a>
+        </Link>
         {" › "}
-        <a href="/cakes" className="hover:text-cocoa">
+        <Link href="/cakes" className="hover:text-cocoa">
           Cakes
-        </a>
+        </Link>
         {" › "}
         {cake.name}
       </p>
