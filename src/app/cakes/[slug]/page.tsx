@@ -5,6 +5,7 @@ import ReviewSection from "@/components/ui/ReviewSection";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+//using nextjs 15
 type Props = {
   params: Promise<{ slug: string }>;
 };
