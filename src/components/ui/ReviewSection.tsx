@@ -26,9 +26,12 @@ export default function ReviewSection({
   const [error, setError] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsLoggedIn(!!session);
-    });
+    async function checkSession() {
+      const { data } = await supabase.auth.getSession();
+      setIsLoggedIn(!!data?.session);
+    }
+
+    checkSession();
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -36,10 +39,9 @@ export default function ReviewSection({
     setSubmitting(true);
     setError("");
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (!session) return;
+    const { data } = await supabase.auth.getSession();
+    if (!data.session) return;
+    const session = data.session;
 
     const { error } = await supabase.from("reviews").insert({
       cake_id: cakeId,
