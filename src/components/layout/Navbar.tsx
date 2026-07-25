@@ -1,48 +1,47 @@
-"use client";
-import { useCart } from "@/lib/cartContext";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+"use client"
+
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase"
+import { useCart } from "@/lib/cartContext"
 
 export default function Navbar() {
-  const [userName, setUserName] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const { count } = useCart();
-  useEffect(() => {
-    async function loadUser() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+  const [userName, setUserName] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+  const { count } = useCart()
 
-      if (session?.user) {
+  useEffect(() => {
+    async function init() {
+      const { data } = await supabase.auth.getSession()
+
+      if (data.session?.user) {
         const { data: profile } = await supabase
           .from("profiles")
           .select("full_name")
-          .eq("id", session.user.id)
-          .single();
+          .eq("id", data.session.user.id)
+          .single()
 
         setUserName(
-          session.user.user_metadata.full_name ||
-            profile?.full_name ||
-            session.user.email ||
-            "Account",
-        );
+          profile?.full_name || data.session.user.email || "Account"
+        )
       }
-      setLoading(false);
+
+      // Set mounted after async work — avoids synchronous setState in effect
+      setMounted(true)
     }
 
-    loadUser();
+    init()
 
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
-      loadUser();
-    });
+      init()
+    })
 
-    return () => listener.subscription.unsubscribe();
-  }, []);
+    return () => listener.subscription.unsubscribe()
+  }, [])
 
   async function handleLogout() {
-    await supabase.auth.signOut();
-    window.location.href = "/";
+    await supabase.auth.signOut()
+    window.location.href = "/"
   }
 
   return (
@@ -59,7 +58,7 @@ export default function Navbar() {
       </nav>
 
       <div className="flex gap-3 items-center">
-        {loading ? null : userName ? (
+        {mounted && userName ? (
           <>
             <span className="font-body text-sm font-semibold text-cocoa">
               Hi, {userName.split(" ")[0]}
@@ -71,21 +70,22 @@ export default function Navbar() {
               Logout
             </button>
           </>
-        ) : (
+        ) : mounted && !userName ? (
           <Link
             href="/login"
             className="font-body text-sm font-semibold border border-cocoa text-cocoa rounded-pill px-5 py-2"
           >
             Login
           </Link>
-        )}
+        ) : null}
+
         <Link
           href="/checkout"
           className="font-body text-sm font-semibold bg-orange text-cocoa rounded-pill px-5 py-2"
         >
-          Order now {count > 0 && `(${count})`}
+          Order now {mounted && count > 0 ? `(${count})` : ""}
         </Link>
       </div>
     </header>
-  );
+  )
 }

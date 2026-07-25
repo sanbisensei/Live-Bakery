@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cartContext";
 import {
   deliveryStrategies,
@@ -9,10 +9,12 @@ import {
 import { OrderRepository } from "@/lib/repositories/orderRepository";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
   const [form, setForm] = useState({
     customer_name: "",
@@ -31,6 +33,14 @@ export default function CheckoutPage() {
   const [promoId, setPromoId] = useState<string | undefined>(undefined);
   const [placing, setPlacing] = useState(false);
   const [error, setError] = useState("");
+
+  // Wait for client mount before rendering cart-dependent UI
+  useEffect(() => {
+    async function init() {
+      setMounted(true);
+    }
+    init();
+  }, []);
 
   const strategy = getDeliveryStrategy(deliveryType);
   const deliveryFee = strategy.calculateFee();
@@ -90,6 +100,22 @@ export default function CheckoutPage() {
     const { data: sessionData } = await supabase.auth.getSession();
     const userId = sessionData.session?.user.id;
 
+    // const { data: order, error: orderError } = await OrderRepository.create({
+    //   ...form,
+    //   delivery_type: deliveryType,
+    //   delivery_fee: deliveryFee,
+    //   subtotal: total,
+    //   discount_amount: discountAmount,
+    //   total_amount: grandTotal,
+    //   promo_code_id: promoId,
+    //   user_id: userId,
+    // });
+
+    // if (orderError || !order) {
+    //   setError("Failed to place order. Please try again.");
+    //   setPlacing(false);
+    //   return;
+    // }
     const { data: order, error: orderError } = await OrderRepository.create({
       ...form,
       delivery_type: deliveryType,
@@ -125,7 +151,7 @@ export default function CheckoutPage() {
     }
 
     clearCart();
-    router.push(`/checkout/success`);
+    router.push("/checkout/success");
   }
 
   return (
@@ -144,7 +170,6 @@ export default function CheckoutPage() {
               <h2 className="font-display text-xl text-cocoa mb-5">
                 Delivery details
               </h2>
-
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="font-body text-xs text-cocoa-soft block mb-1">
@@ -215,7 +240,7 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Delivery speed — Strategy pattern in action */}
+            {/* Delivery speed */}
             <div className="bg-white border border-beige-border rounded-2xl p-6">
               <h2 className="font-display text-xl text-cocoa mb-5">
                 Delivery speed
@@ -309,7 +334,12 @@ export default function CheckoutPage() {
                 Order summary
               </h2>
 
-              {items.length === 0 ? (
+              {/* Only render cart contents after mount to avoid hydration mismatch */}
+              {!mounted ? (
+                <p className="font-body text-sm text-cocoa-soft">
+                  Loading your cart...
+                </p>
+              ) : items.length === 0 ? (
                 <p className="font-body text-sm text-cocoa-soft">
                   Your cart is empty.{" "}
                   <Link
