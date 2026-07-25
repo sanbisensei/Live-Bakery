@@ -5,6 +5,7 @@ type CakeCardProps = {
   name: string;
   price: number;
   originalPrice?: number;
+  imageUrl?: string;
 };
 
 export default function CakeCard({
@@ -12,19 +13,28 @@ export default function CakeCard({
   name,
   price,
   originalPrice,
+  imageUrl,
 }: CakeCardProps) {
   return (
     <div className="bg-white border border-beige-border rounded-2xl overflow-hidden">
-      <div className="bg-beige h-32 flex items-center justify-center">
-        <span className="font-body text-xs text-cocoa-soft">
-          [ cake photo ]
-        </span>
+      <div className="bg-beige h-48 flex items-center justify-center overflow-hidden">
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <span className="font-body text-xs text-cocoa-soft">
+            [ cake photo ]
+          </span>
+        )}
       </div>
 
       <div className="p-4">
         <h3 className="font-display text-lg text-cocoa mb-1">{name}</h3>
 
-        <div className="flex items-baseline gap-2 mb-3">
+        <div className="flex items-baseline gap-2 mb-4">
           <span className="font-body text-base font-semibold text-orange-dark">
             ৳{price}
           </span>
