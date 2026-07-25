@@ -8,8 +8,18 @@ type Size = {
   price_add: number;
 };
 
-export default function SizeSelector({ sizes }: { sizes: Size[] }) {
-  const [selected, setSelected] = useState(sizes[0]?.id);
+type Props = {
+  sizes: Size[];
+  onSelect: (size: Size) => void;
+};
+
+export default function SizeSelector({ sizes, onSelect }: Props) {
+  const [selectedId, setSelectedId] = useState(sizes[0]?.id);
+
+  function handleSelect(size: Size) {
+    setSelectedId(size.id);
+    onSelect(size);
+  }
 
   return (
     <div>
@@ -18,10 +28,10 @@ export default function SizeSelector({ sizes }: { sizes: Size[] }) {
         {sizes.map((size) => (
           <button
             key={size.id}
-            onClick={() => setSelected(size.id)}
+            onClick={() => handleSelect(size)}
             className={`font-body text-sm px-4 py-2 rounded-pill border-2 transition-colors
               ${
-                selected === size.id
+                selectedId === size.id
                   ? "bg-cocoa text-cream border-cocoa"
                   : "bg-cream text-cocoa border-cocoa"
               }`}

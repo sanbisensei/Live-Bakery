@@ -1,8 +1,44 @@
 "use client";
 
-export default function AddToOrderButton({ cake }: { cake: any }) {
+import { useCart } from "@/lib/cartContext";
+
+type Props = {
+  cake: {
+    id: string;
+    name: string;
+    slug: string;
+    base_price: number;
+    discount_pct: number;
+  };
+  selectedSizeId?: string;
+  selectedSizeLabel?: string;
+  selectedPriceAdd?: number;
+};
+
+export default function AddToOrderButton({
+  cake,
+  selectedSizeId,
+  selectedSizeLabel,
+  selectedPriceAdd,
+}: Props) {
+  const { addItem } = useCart();
+
+  const finalPrice =
+    cake.discount_pct > 0
+      ? Math.round(cake.base_price * (1 - cake.discount_pct / 100))
+      : cake.base_price;
+
   function handleAdd() {
-    // Cart logic will be wired in checkout sprint
+    addItem({
+      cakeId: cake.id,
+      cakeName: cake.name,
+      slug: cake.slug,
+      sizeId: selectedSizeId,
+      sizeLabel: selectedSizeLabel,
+      priceAdd: selectedPriceAdd ?? 0,
+      unitPrice: finalPrice,
+      quantity: 1,
+    });
     alert(`${cake.name} added to your order!`);
   }
 

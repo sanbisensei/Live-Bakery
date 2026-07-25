@@ -1,20 +1,55 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { CakeRepository } from "@/lib/repositories/cakeRepository";
 import AddToOrderButton from "@/components/ui/AddToOrderButton";
 import SizeSelector from "@/components/ui/sizeSelector";
 import ReviewSection from "@/components/ui/ReviewSection";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { use } from "react";
 
-//using nextjs 15 and sing page is done for local host
+type Size = {
+  id: string;
+  label: string;
+  price_add: number;
+};
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function CakeDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const { data: cake, error } = await CakeRepository.getBySlug(slug);
+export default function CakeDetailPage({ params }: Props) {
+  const { slug } = use(params);
+  const [cake, setCake] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedSize, setSelectedSize] = useState<Size | null>(null);
 
-  if (error || !cake) return notFound();
+  useEffect(() => {
+    async function load() {
+      const { data, error } = await CakeRepository.getBySlug(slug);
+      if (error || !data) {
+        setLoading(false);
+        return;
+      }
+      setCake(data);
+      if (data.cake_sizes?.length > 0) {
+        setSelectedSize(data.cake_sizes[0]);
+      }
+      setLoading(false);
+    }
+    load();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto px-8 py-20 text-center">
+        <p className="font-body text-sm text-cocoa-soft">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!cake) return notFound();
 
   const discountedPrice =
     cake.discount_pct > 0
@@ -49,7 +84,7 @@ export default async function CakeDetailPage({ params }: Props) {
       {/* Main 2-col layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-14">
         {/* Left: image */}
-        <div className="bg-beige rounded-2xl h-72 md:h-96 flex items-center justify-center">
+        <div className="bg-beige rounded-2xl h-72 md:h-96 flex items-center justify-center overflow-hidden">
           {cake.cake_images?.[0]?.url ? (
             <img
               src={cake.cake_images[0].url}
@@ -65,19 +100,16 @@ export default async function CakeDetailPage({ params }: Props) {
 
         {/* Right: info */}
         <div className="flex flex-col gap-4">
-          {/* Category tag */}
           {cake.categories?.name && (
             <span className="font-body text-xs border border-cocoa-soft text-cocoa-soft rounded-pill px-3 py-1 w-fit">
               {cake.categories.name}
             </span>
           )}
 
-          {/* Name */}
           <h1 className="font-display text-3xl text-cocoa leading-tight">
             {cake.name}
           </h1>
 
-          {/* Rating */}
           {averageRating && (
             <div className="flex items-center gap-2">
               <span className="text-orange text-lg">
@@ -91,7 +123,6 @@ export default async function CakeDetailPage({ params }: Props) {
             </div>
           )}
 
-          {/* Price */}
           <div className="flex items-baseline gap-3">
             <span className="font-body text-2xl font-semibold text-orange-dark">
               ৳{discountedPrice ?? cake.base_price}
@@ -108,24 +139,28 @@ export default async function CakeDetailPage({ params }: Props) {
             )}
           </div>
 
-          {/* Description */}
           {cake.description && (
             <p className="font-body text-sm text-cocoa-soft leading-relaxed">
               {cake.description}
             </p>
           )}
 
-          {/* Size selector */}
           {cake.cake_sizes?.length > 0 && (
-            <SizeSelector sizes={cake.cake_sizes} />
+            <SizeSelector
+              sizes={cake.cake_sizes}
+              onSelect={(size) => setSelectedSize(size)}
+            />
           )}
 
-          {/* Add to order */}
-          <AddToOrderButton cake={cake} />
+          <AddToOrderButton
+            cake={cake}
+            selectedSizeId={selectedSize?.id}
+            selectedSizeLabel={selectedSize?.label}
+            selectedPriceAdd={selectedSize?.price_add}
+          />
         </div>
       </div>
 
-      {/* Reviews section */}
       <ReviewSection reviews={cake.reviews} cakeId={cake.id} />
     </div>
   );

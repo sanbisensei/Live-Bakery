@@ -1,5 +1,5 @@
 "use client";
-
+import { useCart } from "@/lib/cartContext";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase";
 export default function Navbar() {
   const [userName, setUserName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const { count } = useCart();
   useEffect(() => {
     async function loadUser() {
       const {
@@ -80,10 +80,10 @@ export default function Navbar() {
           </Link>
         )}
         <Link
-          href="/cakes"
+          href="/checkout"
           className="font-body text-sm font-semibold bg-orange text-cocoa rounded-pill px-5 py-2"
         >
-          Order now
+          Order now {count > 0 && `(${count})`}
         </Link>
       </div>
     </header>
