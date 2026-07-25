@@ -35,22 +35,21 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
-
-  // Load from localStorage on mount
-  useEffect(() => {
+// Lazy initializer — reads localStorage once on first render, no useEffect needed
+function getInitialItems(): CartItem[] {
+  if (typeof window === "undefined") return [];
+  try {
     const stored = localStorage.getItem("bakery_cart");
-    if (stored) {
-      try {
-        setItems(JSON.parse(stored));
-      } catch {
-        setItems([]);
-      }
-    }
-  }, []);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
 
-  // Save to localStorage on every change
+export function CartProvider({ children }: { children: ReactNode }) {
+  const [items, setItems] = useState<CartItem[]>(getInitialItems);
+
+  // Only saves to localStorage — never sets state, no cascade
   useEffect(() => {
     localStorage.setItem("bakery_cart", JSON.stringify(items));
   }, [items]);
