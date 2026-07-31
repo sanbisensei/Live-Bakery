@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AddToOrderButton from "@/components/ui/AddToOrderButton";
 
 type CakeCardProps = {
   slug: string;
@@ -46,9 +47,20 @@ export default function CakeCard({
         </div>
 
         <div className="flex gap-2">
-          <button className="flex-1 font-body text-xs font-semibold bg-orange text-cocoa rounded-pill py-2">
+          {/* <button className="flex-1 font-body text-xs font-semibold bg-orange text-cocoa rounded-pill py-2">
             Add to order
-          </button>
+          </button> */}
+          <AddToOrderButton
+            cake={{
+              id,
+              name,
+              slug,
+              base_price: originalPrice ?? price,
+              discount_pct: originalPrice
+                ? Math.round(((originalPrice - price) / originalPrice) * 100)
+                : 0,
+            }}
+          />
           <Link
             href={`/cakes/${slug}`}
             className="flex-1 text-center font-body text-xs font-semibold border-2 border-cocoa text-cocoa rounded-pill py-2"
