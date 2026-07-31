@@ -109,9 +109,9 @@ export default function AddToOrderButton({
     <>
       <button
         onClick={handleAdd}
-        className={`font-body text-xs font-semibold bg-orange text-cocoa rounded-pill
-  inline-flex items-center justify-center h-10 w-full
-  transition-colors duration-200 hover:bg-orange-dark ${className}`}
+        className={`font-display text-xl bg-orange text-cocoa rounded-pill
+inline-flex items-center justify-center h-10 px-6 w-full
+transition-colors duration-200 hover:bg-orange-dark ${className}`}
       >
         Add to order
       </button>
