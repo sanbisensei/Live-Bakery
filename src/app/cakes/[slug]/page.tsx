@@ -21,7 +21,26 @@ type Props = {
 
 export default function CakeDetailPage({ params }: Props) {
   const { slug } = use(params);
-  const [cake, setCake] = useState<any>(null);
+  type Cake = {
+    id: string;
+    name: string;
+    slug: string;
+    base_price: number;
+    discount_pct: number;
+    description?: string;
+    cake_images: { url: string }[];
+    cake_sizes: Size[];
+    categories?: { name: string };
+    reviews: {
+      id: string;
+      rating: number;
+      message: string;
+      created_at: string;
+      profiles: { full_name: string };
+    }[];
+  };
+
+  const [cake, setCake] = useState<Cake | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
 
