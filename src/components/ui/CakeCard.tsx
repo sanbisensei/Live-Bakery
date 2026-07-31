@@ -1,5 +1,9 @@
 import Link from "next/link";
+("use client");
 
+import { useState } from "react";
+import { useCart } from "@/lib/cartContext";
+import Toast from "@/components/ui/Toast";
 type CakeCardProps = {
   slug: string;
   name: string;
