@@ -1,13 +1,13 @@
 import Link from "next/link";
 import AddToOrderButton from "@/components/ui/AddToOrderButton";
 
-type CakeCardProps = {
-  slug: string;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  imageUrl?: string;
-};
+// type CakeCardProps = {
+//   slug: string;
+//   name: string;
+//   price: number;
+//   originalPrice?: number;
+//   imageUrl?: string;
+// };
 
 export default function CakeCard({
   slug,
