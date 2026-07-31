@@ -45,6 +45,7 @@ export default async function CakesPage() {
             return (
               <CakeCard
                 key={cake.id}
+                id={cake.id}
                 slug={cake.slug}
                 name={cake.name}
                 price={finalPrice}
