@@ -70,7 +70,7 @@ export default function CakeCard({
 
           <Link
             href={`/cakes/${slug}`}
-            className="flex-1 inline-flex items-center justify-center h-10
+            className="font-display flex-1 inline-flex items-center justify-center h-10
       font-body text-xs font-semibold border-2 border-cocoa text-cocoa rounded-pill
       transition-colors duration-200 hover:bg-cocoa hover:text-cream"
           >
