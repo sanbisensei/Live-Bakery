@@ -54,7 +54,7 @@ export default function CakeCard({
           )}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <AddToOrderButton
             cake={{
               id,
@@ -65,10 +65,9 @@ export default function CakeCard({
                 ? Math.round(((originalPrice - price) / originalPrice) * 100)
                 : 0,
             }}
-            className="flex-1 inline-flex items-center justify-center h-10
-      font-body text-xs font-semibold bg-orange text-cocoa rounded-pill
-      transition-colors duration-200 hover:bg-orange-dark"
+            className="flex-1"
           />
+
           <Link
             href={`/cakes/${slug}`}
             className="flex-1 inline-flex items-center justify-center h-10
