@@ -8,8 +8,16 @@ import AddToOrderButton from "@/components/ui/AddToOrderButton";
 //   originalPrice?: number;
 //   imageUrl?: string;
 // };
-
+type CakeCardProps = {
+  id: string;
+  slug: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  imageUrl?: string;
+};
 export default function CakeCard({
+  id,
   slug,
   name,
   price,
