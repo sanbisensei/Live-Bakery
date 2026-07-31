@@ -26,7 +26,7 @@ export default function CakeCard({
           />
         ) : (
           <span className="font-body text-xs text-cocoa-soft">
-            [ cake photo ]
+            [ cake photooo ]
           </span>
         )}
       </div>
