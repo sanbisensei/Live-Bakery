@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function CheckoutPage() {
-  const { items, total, clearCart } = useCart();
+  const { items, total, clearCart, removeItem, updateQuantity } = useCart();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
