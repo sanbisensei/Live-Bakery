@@ -48,6 +48,7 @@ export default async function Home() {
 
                 return (
                   <CakeCard
+                    id={cake.id}
                     key={cake.id}
                     slug={cake.slug}
                     name={cake.name}
