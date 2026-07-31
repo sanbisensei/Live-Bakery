@@ -68,6 +68,8 @@ type Props = {
   selectedSizeId?: string;
   selectedSizeLabel?: string;
   selectedPriceAdd?: number;
+  // added new
+  className?: string;
 };
 
 export default function AddToOrderButton({
@@ -75,6 +77,8 @@ export default function AddToOrderButton({
   selectedSizeId,
   selectedSizeLabel,
   selectedPriceAdd,
+  // added new
+  className = "",
 }: Props) {
   const { addItem } = useCart();
   const [showToast, setShowToast] = useState(false);
@@ -105,7 +109,9 @@ export default function AddToOrderButton({
     <>
       <button
         onClick={handleAdd}
-        className="font-body text-sm font-semibold bg-orange text-cocoa rounded-pill py-3 px-6 w-full md:w-fit"
+        className={`font-body text-xs font-semibold bg-orange text-cocoa rounded-pill
+  inline-flex items-center justify-center h-10 w-full
+  transition-colors duration-200 hover:bg-orange-dark ${className}`}
       >
         Add to order
       </button>
