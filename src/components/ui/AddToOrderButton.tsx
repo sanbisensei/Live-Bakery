@@ -53,7 +53,9 @@
 // }
 "use client";
 
+import { useState } from "react";
 import { useCart } from "@/lib/cartContext";
+import Toast from "@/components/ui/Toast";
 
 type Props = {
   cake: {
@@ -75,6 +77,7 @@ export default function AddToOrderButton({
   selectedPriceAdd,
 }: Props) {
   const { addItem } = useCart();
+  const [showToast, setShowToast] = useState(false);
 
   // Use the selected size's price if available, otherwise fall back to base_price
   const basePriceForSize = selectedPriceAdd ?? cake.base_price;
@@ -95,15 +98,28 @@ export default function AddToOrderButton({
       unitPrice: finalPrice,
       quantity: 1,
     });
-    alert(`${cake.name} added to your order!`);
+    setShowToast(true);
   }
 
   return (
-    <button
-      onClick={handleAdd}
-      className="font-body text-sm font-semibold bg-orange text-cocoa rounded-pill py-3 px-6 w-full md:w-fit"
-    >
-      Add to order
-    </button>
+    <>
+      <button
+        onClick={handleAdd}
+        className="font-body text-sm font-semibold bg-orange text-cocoa rounded-pill py-3 px-6 w-full md:w-fit"
+      >
+        Add to order
+      </button>
+
+      <Toast
+        show={showToast}
+        onDone={() => setShowToast(false)}
+        message={`${cake.name} added to your order`}
+        subtext={
+          selectedSizeLabel
+            ? `${selectedSizeLabel} · ৳${finalPrice}`
+            : undefined
+        }
+      />
+    </>
   );
 }
