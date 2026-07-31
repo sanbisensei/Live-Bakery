@@ -41,12 +41,14 @@ export default function Toast({
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2"
+      className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4
+        pt-[env(safe-area-inset-top)] pointer-events-none"
     >
       <div
         className={`flex items-center gap-3 bg-cocoa text-cream rounded-2xl pl-4 pr-6 py-4 shadow-xl
+          w-full max-w-sm pointer-events-auto
           transition-all duration-300 ease-out
-          ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+          ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"}`}
       >
         <span className="flex items-center justify-center w-8 h-8 rounded-full bg-orange shrink-0">
           <svg
@@ -65,12 +67,14 @@ export default function Toast({
             />
           </svg>
         </span>
-        <div>
-          <p className="font-body text-sm font-semibold leading-tight">
+        <div className="min-w-0">
+          <p className="font-body text-sm font-semibold leading-tight truncate">
             {message}
           </p>
           {subtext && (
-            <p className="font-body text-xs text-cream/70 mt-0.5">{subtext}</p>
+            <p className="font-body text-xs text-cream/70 mt-0.5 truncate">
+              {subtext}
+            </p>
           )}
         </div>
       </div>
