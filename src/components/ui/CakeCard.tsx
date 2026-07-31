@@ -1,9 +1,5 @@
 import Link from "next/link";
-("use client");
 
-import { useState } from "react";
-import { useCart } from "@/lib/cartContext";
-import Toast from "@/components/ui/Toast";
 type CakeCardProps = {
   slug: string;
   name: string;
@@ -30,7 +26,7 @@ export default function CakeCard({
           />
         ) : (
           <span className="font-body text-xs text-cocoa-soft">
-            [ cake photooo ]
+            [ cake photo ]
           </span>
         )}
       </div>
@@ -50,22 +46,7 @@ export default function CakeCard({
         </div>
 
         <div className="flex gap-2">
-          <button
-            onClick={() => {
-              addItem({
-                cakeId: id,
-                cakeName: name,
-                slug,
-                sizeId: undefined,
-                sizeLabel: undefined,
-                priceAdd: 0,
-                unitPrice: price,
-                quantity: 1,
-              });
-              setShowToast(true);
-            }}
-            className="flex-1 font-body text-xs font-semibold bg-orange text-cocoa rounded-pill py-2"
-          >
+          <button className="flex-1 font-body text-xs font-semibold bg-orange text-cocoa rounded-pill py-2">
             Add to order
           </button>
           <Link
