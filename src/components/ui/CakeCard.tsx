@@ -55,9 +55,6 @@ export default function CakeCard({
         </div>
 
         <div className="flex gap-2">
-          {/* <button className="flex-1 font-body text-xs font-semibold bg-orange text-cocoa rounded-pill py-2">
-            Add to order
-          </button> */}
           <AddToOrderButton
             cake={{
               id,
@@ -68,10 +65,15 @@ export default function CakeCard({
                 ? Math.round(((originalPrice - price) / originalPrice) * 100)
                 : 0,
             }}
+            className="flex-1 inline-flex items-center justify-center h-10
+      font-body text-xs font-semibold bg-orange text-cocoa rounded-pill
+      transition-colors duration-200 hover:bg-orange-dark"
           />
           <Link
             href={`/cakes/${slug}`}
-            className="flex-1 text-center font-body text-xs font-semibold border-2 border-cocoa text-cocoa rounded-pill py-2"
+            className="flex-1 inline-flex items-center justify-center h-10
+      font-body text-xs font-semibold border-2 border-cocoa text-cocoa rounded-pill
+      transition-colors duration-200 hover:bg-cocoa hover:text-cream"
           >
             View
           </Link>
