@@ -351,7 +351,7 @@ export default function CheckoutPage() {
                 </p>
               ) : (
                 <>
-                  <div className="flex flex-col gap-3 mb-5">
+                  {/* <div className="flex flex-col gap-3 mb-5">
                     {items.map((item, i) => (
                       <div key={i} className="flex justify-between items-start">
                         <div>
@@ -367,6 +367,76 @@ export default function CheckoutPage() {
                             × {item.quantity}
                           </p>
                         </div>
+                        <span className="font-body text-sm font-semibold text-cocoa">
+                          ৳
+                          {(item.unitPrice + (item.priceAdd ?? 0)) *
+                            item.quantity}
+                        </span>
+                      </div>
+                    ))}
+                  </div> */}
+                  <div className="flex flex-col gap-3 mb-5">
+                    {items.map((item) => (
+                      <div
+                        key={`${item.cakeId}-${item.sizeId}`}
+                        className="flex justify-between items-start"
+                      >
+                        <div>
+                          <p className="font-body text-sm text-cocoa">
+                            {item.cakeName}
+                          </p>
+
+                          {item.sizeLabel && (
+                            <p className="font-body text-xs text-cocoa-soft">
+                              {item.sizeLabel}
+                            </p>
+                          )}
+
+                          <div className="flex items-center gap-2 mt-2">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateQuantity(
+                                  item.cakeId,
+                                  item.sizeId,
+                                  item.quantity - 1,
+                                )
+                              }
+                              className="w-6 h-6 rounded-full border border-cocoa text-cocoa"
+                            >
+                              -
+                            </button>
+
+                            <span className="font-body text-sm">
+                              {item.quantity}
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateQuantity(
+                                  item.cakeId,
+                                  item.sizeId,
+                                  item.quantity + 1,
+                                )
+                              }
+                              className="w-6 h-6 rounded-full border border-cocoa text-cocoa"
+                            >
+                              +
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() =>
+                                removeItem(item.cakeId, item.sizeId)
+                              }
+                              className="font-body text-xs text-red-500 ml-2"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+
                         <span className="font-body text-sm font-semibold text-cocoa">
                           ৳
                           {(item.unitPrice + (item.priceAdd ?? 0)) *
