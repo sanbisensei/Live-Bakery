@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { OrderRepository } from "@/lib/repositories/orderRepository";
-import { useOrderStatus } from "@/hooks/useOrderStatus";
+import { useOrderStatus } from "@/hooks/userOrderStatus";
 
 type OrderItem = {
   id: string;
