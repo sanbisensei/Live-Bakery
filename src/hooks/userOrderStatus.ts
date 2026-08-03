@@ -21,7 +21,7 @@ export function useOrderStatus(orderId: string, initialStatus: string) {
           table: "orders",
           filter: `id=eq.${orderId}`,
         },
-        (payload) => {
+        (payload: { new: { status: string } }) => {
           // Observer gets notified — update UI instantly
           setStatus(payload.new.status);
         },
