@@ -154,8 +154,8 @@ export default function Hero() {
             Home-baked in Mohammadpur
           </p>
 
-          <h1 className="font-display text-6xl md:text-7xl text-cocoa leading-[1.05] mb-5">
-            <span className="block overflow-hidden">
+          <h1 className="font-display text-6xl md:text-7xl text-cocoa leading-[1.18] mb-5">
+            <span className="block overflow-hidden py-1">
               <span
                 className="word-in inline-block"
                 style={{ animationDelay: "0.05s" }}
@@ -169,26 +169,28 @@ export default function Hero() {
                 slice,
               </span>
             </span>
-            <span className="block overflow-hidden relative w-fit">
-              <span
-                className="word-in inline-block italic text-orange-dark relative"
-                style={{ animationDelay: "0.2s" }}
-              >
-                made by hand
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 220 20"
-                  className="underline-draw absolute -bottom-2 left-0 w-full h-4 text-orange-dark"
+            <span className="block relative w-fit">
+              <span className="block overflow-hidden py-1">
+                <span
+                  className="word-in inline-block italic text-orange-dark"
+                  style={{ animationDelay: "0.2s" }}
                 >
-                  <path
-                    d="M2 12 C 40 4, 70 18, 108 10 S 178 2, 218 11"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                  made by hand
+                </span>
               </span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 220 20"
+                className="underline-draw absolute bottom-1 left-0 w-full h-4 text-orange-dark"
+              >
+                <path
+                  d="M2 12 C 40 4, 70 18, 108 10 S 178 2, 218 11"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+              </svg>
             </span>
           </h1>
 
@@ -205,7 +207,7 @@ export default function Hero() {
           >
             <MagneticLink
               href="/cakes"
-              className="group font-body text-base font-semibold bg-cocoa text-cream rounded-pill px-7 py-3.5 transition-shadow duration-300 hover:shadow-lg hover:shadow-cocoa/20 inline-flex items-center gap-2 will-change-transform"
+              className="group font-body text-base font-semibold bg-cocoa text-cream rounded-pill px-7 py-3.5 transition-[transform,box-shadow] duration-300 ease-out hover:shadow-lg hover:shadow-cocoa/20 inline-flex items-center gap-2 will-change-transform"
             >
               Browse cakes
               <svg
@@ -225,7 +227,7 @@ export default function Hero() {
             </MagneticLink>
             <MagneticLink
               href="/blog"
-              className="font-body text-base font-semibold border-2 border-cocoa text-cocoa rounded-pill px-7 py-3.5 transition-colors duration-300 hover:bg-cocoa hover:text-cream will-change-transform"
+              className="font-body text-base font-semibold border-2 border-cocoa text-cocoa rounded-pill px-7 py-3.5 transition-[transform,color,background-color] duration-300 ease-out hover:bg-cocoa hover:text-cream will-change-transform"
             >
               Read the blog
             </MagneticLink>
