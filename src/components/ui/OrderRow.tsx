@@ -398,7 +398,12 @@ export default function OrderRow({
         ).map((s) => (
           <button
             key={s}
-            disabled={updating || status === s}
+            disabled={
+              updating ||
+              status === s ||
+              status === "cancelled" ||
+              status === "delivered"
+            }
             onClick={() => handleStatusChange(s)}
             className={`font-body text-xs font-semibold px-3 py-1.5 rounded-pill border-2 capitalize transition-colors disabled:opacity-40
                 ${
