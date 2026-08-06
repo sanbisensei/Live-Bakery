@@ -23,6 +23,7 @@ export default function Navbar() {
           .single();
 
         setUserName(profile?.full_name || data.session.user.email || "Account");
+        setIsAdmin(profile?.role === "admin");
       }
 
       // Set mounted after async work — avoids synchronous setState in effect
