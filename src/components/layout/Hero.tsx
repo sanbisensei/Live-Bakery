@@ -133,7 +133,7 @@ export default function Hero() {
   const { wrapRef, cardRef, badgeRef } = useTilt(7);
 
   return (
-    <section className="relative overflow-hidden px-4 md:px-10 py-16 md:py-24 bg-cream min-h-[85vh] flex items-center">
+    <section className="relative overflow-hidden px-4 md:px-10 py-14 md:py-20 bg-cream">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
@@ -155,7 +155,7 @@ export default function Hero() {
           </p>
 
           <h1 className="font-display text-6xl md:text-7xl text-cocoa leading-[1.18] mb-5">
-            <span className="block overflow-hidden py-1">
+            <span className="block">
               <span
                 className="word-in inline-block"
                 style={{ animationDelay: "0.05s" }}
@@ -170,13 +170,11 @@ export default function Hero() {
               </span>
             </span>
             <span className="block relative w-fit">
-              <span className="block overflow-hidden py-1">
-                <span
-                  className="word-in inline-block italic text-orange-dark"
-                  style={{ animationDelay: "0.2s" }}
-                >
-                  made by hand
-                </span>
+              <span
+                className="word-in inline-block italic text-orange-dark"
+                style={{ animationDelay: "0.2s" }}
+              >
+                made by hand
               </span>
               <svg
                 aria-hidden="true"
@@ -352,7 +350,7 @@ export default function Hero() {
           to { opacity: 1; transform: translateY(0); }
         }
         @keyframes wordRise {
-          from { opacity: 0; transform: translateY(100%); }
+          from { opacity: 0; transform: translateY(18px); }
           to { opacity: 1; transform: translateY(0); }
         }
         @keyframes underlineDraw {
