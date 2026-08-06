@@ -78,7 +78,14 @@ export default function Navbar() {
             Login
           </Link>
         ) : null}
-
+        {mounted && isAdmin && (
+          <Link
+            href="/admin"
+            className="font-body text-sm font-semibold bg-cocoa text-cream rounded-pill px-5 py-2"
+          >
+            Admin
+          </Link>
+        )}
         <Link
           href="/checkout"
           className="font-body text-sm font-semibold bg-orange text-cocoa rounded-pill px-5 py-2"
