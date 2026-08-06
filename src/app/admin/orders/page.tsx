@@ -34,10 +34,6 @@ export default function AdminOrdersPage() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadOrders();
-  }, []);
-
   async function loadOrders() {
     setLoading(true);
     const { data, error } = await OrderRepository.getAll();
@@ -49,6 +45,10 @@ export default function AdminOrdersPage() {
     }
     setLoading(false);
   }
+
+  useEffect(() => {
+    loadOrders();
+  }, []);
 
   function handleStatusChange(id: string, newStatus: string) {
     setOrders((prev) =>
