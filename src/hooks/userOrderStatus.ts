@@ -9,6 +9,14 @@ import { supabase } from "@/lib/supabase";
 export function useOrderStatus(orderId: string, initialStatus: string) {
   const [status, setStatus] = useState(initialStatus);
 
+  // Sync state when parent sends updated status
+
+  const [prevInitialStatus, setPrevInitialStatus] = useState(initialStatus);
+
+  if (initialStatus !== prevInitialStatus) {
+    setPrevInitialStatus(initialStatus);
+    setStatus(initialStatus);
+  }
   useEffect(() => {
     // Observer registers itself — subscribes to this specific order
     const channel = supabase
