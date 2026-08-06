@@ -133,7 +133,7 @@ export default function Hero() {
   const { wrapRef, cardRef, badgeRef } = useTilt(7);
 
   return (
-    <section className="relative overflow-hidden px-6 py-12 md:py-16 bg-cream">
+    <section className="relative overflow-hidden px-4 md:px-10 py-16 md:py-24 bg-cream min-h-[85vh] flex items-center">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
@@ -144,7 +144,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center max-w-6xl mx-auto">
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center max-w-7xl mx-auto w-full">
         <div>
           <p className="hero-in font-body text-xs tracking-widest uppercase text-orange-dark mb-3 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
@@ -154,7 +154,7 @@ export default function Hero() {
             Home-baked in Mohammadpur
           </p>
 
-          <h1 className="font-display text-5xl md:text-6xl text-cocoa leading-[1.05] mb-4">
+          <h1 className="font-display text-6xl md:text-7xl text-cocoa leading-[1.05] mb-5">
             <span className="block overflow-hidden">
               <span
                 className="word-in inline-block"
@@ -193,19 +193,19 @@ export default function Hero() {
           </h1>
 
           <p
-            className="hero-in font-body text-base text-cocoa-soft mb-6 max-w-sm"
+            className="hero-in font-body text-lg text-cocoa-soft mb-7 max-w-sm"
             style={{ animationDelay: "0.32s" }}
           >
             Order online, pick your size, and pay when it arrives at your door.
           </p>
 
           <div
-            className="hero-in flex flex-wrap gap-3 mb-6"
+            className="hero-in flex flex-wrap gap-3 mb-7"
             style={{ animationDelay: "0.4s" }}
           >
             <MagneticLink
               href="/cakes"
-              className="group font-body text-sm font-semibold bg-cocoa text-cream rounded-pill px-6 py-3 transition-shadow duration-300 hover:shadow-lg hover:shadow-cocoa/20 inline-flex items-center gap-2 will-change-transform"
+              className="group font-body text-base font-semibold bg-cocoa text-cream rounded-pill px-7 py-3.5 transition-shadow duration-300 hover:shadow-lg hover:shadow-cocoa/20 inline-flex items-center gap-2 will-change-transform"
             >
               Browse cakes
               <svg
@@ -225,7 +225,7 @@ export default function Hero() {
             </MagneticLink>
             <MagneticLink
               href="/blog"
-              className="font-body text-sm font-semibold border-2 border-cocoa text-cocoa rounded-pill px-6 py-3 transition-colors duration-300 hover:bg-cocoa hover:text-cream will-change-transform"
+              className="font-body text-base font-semibold border-2 border-cocoa text-cocoa rounded-pill px-7 py-3.5 transition-colors duration-300 hover:bg-cocoa hover:text-cream will-change-transform"
             >
               Read the blog
             </MagneticLink>
@@ -268,7 +268,7 @@ export default function Hero() {
           <div className="reveal-mask">
             <div
               ref={cardRef}
-              className="relative bg-beige rounded-2xl h-64 md:h-[22rem] flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out will-change-transform"
+              className="relative bg-beige rounded-2xl h-80 md:h-[28rem] flex items-center justify-center overflow-hidden transition-transform duration-300 ease-out will-change-transform"
             >
               <div
                 aria-hidden="true"
