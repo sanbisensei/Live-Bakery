@@ -34,19 +34,19 @@ export default function AdminOrdersPage() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  async function loadOrders() {
-    setLoading(true);
-    const { data, error } = await OrderRepository.getAll();
-    if (error) {
-      setErrorMsg(error.message);
-    } else {
-      setOrders((data as Order[]) ?? []);
-      setErrorMsg(null);
-    }
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function loadOrders() {
+      setLoading(true);
+      const { data, error } = await OrderRepository.getAll();
+      if (error) {
+        setErrorMsg(error.message);
+      } else {
+        setOrders((data as Order[]) ?? []);
+        setErrorMsg(null);
+      }
+      setLoading(false);
+    }
+
     loadOrders();
   }, []);
 
