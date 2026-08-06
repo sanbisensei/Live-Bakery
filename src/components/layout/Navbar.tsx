@@ -18,7 +18,7 @@ export default function Navbar() {
       if (data.session?.user) {
         const { data: profile } = await supabase
           .from("profiles")
-          .select("full_name")
+          .select("full_name , role")
           .eq("id", data.session.user.id)
           .single();
 
