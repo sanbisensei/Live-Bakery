@@ -105,6 +105,9 @@ export default function AdminOrdersPage() {
                   prev.map((o) => (o.id === id ? { ...o, status } : o)),
                 );
               }}
+              onCancelled={() => {
+                setOrders((prev) => prev.filter((o) => o.id !== order.id));
+              }}
             />
           ))}
         </div>
