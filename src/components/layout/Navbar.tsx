@@ -1,47 +1,46 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import { supabase } from "@/lib/supabase"
-import { useCart } from "@/lib/cartContext"
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { useCart } from "@/lib/cartContext";
 
 export default function Navbar() {
-  const [userName, setUserName] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
-  const { count } = useCart()
+  const [userName, setUserName] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const { count } = useCart();
 
   useEffect(() => {
     async function init() {
-      const { data } = await supabase.auth.getSession()
+      const { data } = await supabase.auth.getSession();
 
       if (data.session?.user) {
         const { data: profile } = await supabase
           .from("profiles")
           .select("full_name")
           .eq("id", data.session.user.id)
-          .single()
+          .single();
 
-        setUserName(
-          profile?.full_name || data.session.user.email || "Account"
-        )
+        setUserName(profile?.full_name || data.session.user.email || "Account");
       }
 
       // Set mounted after async work — avoids synchronous setState in effect
-      setMounted(true)
+      setMounted(true);
     }
 
-    init()
+    init();
 
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
-      init()
-    })
+      init();
+    });
 
-    return () => listener.subscription.unsubscribe()
-  }, [])
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
   async function handleLogout() {
-    await supabase.auth.signOut()
-    window.location.href = "/"
+    await supabase.auth.signOut();
+    window.location.href = "/";
   }
 
   return (
@@ -87,5 +86,5 @@ export default function Navbar() {
         </Link>
       </div>
     </header>
-  )
+  );
 }
