@@ -209,16 +209,16 @@ const WHATSAPP_NUMBER = "8801XXXXXXXXX";
 
 // Drop 9-10 images into public/custom-cake/ named 1.jpg, 2.jpg, ... and list them here
 const GALLERY_IMAGES = [
-  "/custom-cake/1.jpg",
-  "/custom-cake/2.jpg",
-  "/custom-cake/3.jpg",
-  "/custom-cake/4.jpg",
-  "/custom-cake/5.jpg",
-  "/custom-cake/6.jpg",
-  "/custom-cake/7.jpg",
-  "/custom-cake/8.jpg",
-  "/custom-cake/9.jpg",
-  "/custom-cake/10.jpg",
+  "/custom-cake/1.jpeg",
+  "/custom-cake/2.jpeg",
+  "/custom-cake/3.jpeg",
+  "/custom-cake/4.jpeg",
+  "/custom-cake/5.jpeg",
+  "/custom-cake/6.jpeg",
+  "/custom-cake/7.jpeg",
+  "/custom-cake/8.jpeg",
+  "/custom-cake/9.jpeg",
+  "/custom-cake/10.jpeg",
 ];
 
 function buildWhatsappLink(message: string) {
