@@ -163,8 +163,11 @@ export default function Navbar() {
   }, []);
 
   // UI-only effect: close the mobile drawer whenever the route changes.
+  // Defer the state update to avoid a synchronous setState inside the effect
+  // which can cause cascading renders.
   useEffect(() => {
-    setMobileOpen(false);
+    const raf = window.requestAnimationFrame(() => setMobileOpen(false));
+    return () => window.cancelAnimationFrame(raf);
   }, [pathname]);
 
   async function handleLogout() {
