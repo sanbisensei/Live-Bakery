@@ -124,6 +124,7 @@ export default function Navbar() {
   // any auth/cart/admin state above. ---
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     async function init() {
@@ -160,6 +161,11 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // UI-only effect: close the mobile drawer whenever the route changes.
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   async function handleLogout() {
     await supabase.auth.signOut();
@@ -204,10 +210,10 @@ export default function Navbar() {
           })}
         </nav>
 
-        <div className="flex gap-3 items-center">
+        <div className="hidden md:flex gap-3 items-center">
           {mounted && userName ? (
             <>
-              <span className="hidden sm:inline font-body text-sm font-semibold text-cocoa">
+              <span className="hidden lg:inline font-body text-sm font-semibold text-cocoa">
                 Hi, {userName.split(" ")[0]}
               </span>
               <button
@@ -248,6 +254,104 @@ export default function Navbar() {
             )}
           </Link>
         </div>
+
+        {/* mobile: order button stays visible, hamburger toggles the drawer below */}
+        <div className="flex md:hidden items-center gap-2">
+          <Link
+            href="/checkout"
+            className="relative font-body text-sm font-semibold bg-orange text-cocoa rounded-pill px-4 py-2 transition-colors duration-300 hover:bg-orange-dark inline-flex items-center gap-1.5"
+          >
+            Order now
+            {mounted && count > 0 && (
+              <span
+                key={count}
+                className="cart-pop inline-flex items-center justify-center min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-cocoa text-cream text-[11px] font-semibold"
+              >
+                {count}
+              </span>
+            )}
+          </Link>
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="relative w-9 h-9 flex items-center justify-center text-cocoa"
+          >
+            <span
+              className={`absolute h-[1.5px] w-5 bg-cocoa transition-all duration-300 ease-out ${
+                mobileOpen ? "rotate-45" : "-translate-y-1.5"
+              }`}
+            />
+            <span
+              className={`absolute h-[1.5px] w-5 bg-cocoa transition-all duration-200 ease-out ${
+                mobileOpen ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute h-[1.5px] w-5 bg-cocoa transition-all duration-300 ease-out ${
+                mobileOpen ? "-rotate-45" : "translate-y-1.5"
+              }`}
+            />
+          </button>
+        </div>
+      </div>
+
+      {/* mobile drawer */}
+      <div
+        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out border-t ${
+          mobileOpen
+            ? "max-h-96 opacity-100 border-beige-border"
+            : "max-h-0 opacity-0 border-transparent"
+        }`}
+      >
+        <nav className="flex flex-col px-4 py-3 font-body text-sm text-cocoa-soft">
+          {NAV_LINKS.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`py-2.5 border-b border-beige-border last:border-b-0 transition-colors duration-200 ${
+                  active ? "text-cocoa font-semibold" : "hover:text-cocoa"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+          <div className="flex flex-col gap-2 pt-3">
+            {mounted && userName ? (
+              <>
+                <span className="font-body text-sm font-semibold text-cocoa px-0.5">
+                  Hi, {userName.split(" ")[0]}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="font-body text-sm font-semibold border border-cocoa text-cocoa rounded-pill px-5 py-2 transition-colors duration-300 hover:bg-cocoa hover:text-cream text-left"
+                >
+                  Logout
+                </button>
+              </>
+            ) : mounted && !userName ? (
+              <Link
+                href="/login"
+                className="font-body text-sm font-semibold border border-cocoa text-cocoa rounded-pill px-5 py-2 transition-colors duration-300 hover:bg-cocoa hover:text-cream text-center"
+              >
+                Login
+              </Link>
+            ) : null}
+            {mounted && isAdmin && (
+              <Link
+                href="/admin"
+                className="font-body text-sm font-semibold bg-cocoa text-cream rounded-pill px-5 py-2 text-center"
+              >
+                Admin
+              </Link>
+            )}
+          </div>
+        </nav>
       </div>
 
       <style>{`
