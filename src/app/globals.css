@@ -1,3 +1,34 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fff8f0;
+  --color-orange: #f4a95c;
+  --color-orange-dark: #e07a45;
+  --color-cocoa: #3d2b22;
+  --color-cocoa-soft: #6b5a4d;
+  --color-beige: #fbe4c7;
+  --color-beige-border: #ecdfc8;
+  --color-pistachio: #7c9070;
+
+  --font-display: "Young Serif", serif;
+  --font-body: "Karla", sans-serif;
+
+  --radius-pill: 999px;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-cocoa);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+} */
+
 @import url("https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
@@ -27,4 +58,41 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
+}
+
+@keyframes drift-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes drift-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-drift-up {
+  animation-name: drift-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-drift-down {
+  animation-name: drift-down;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-up,
+  .animate-drift-down {
+    animation: none;
+  }
 }
