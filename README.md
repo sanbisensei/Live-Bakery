@@ -50,3 +50,12 @@ Customers can browse available cakes, create accounts, place orders, use promoti
 - Checkout and place orders
 - Apply promotional codes
 - View customer reviews
+
+## Admin Features
+
+- Manage customer orders
+- Update order status
+- Add and edit cakes
+- Manage cake availability
+- Manage promotional codes
+- Activate or deactivate promo codes
