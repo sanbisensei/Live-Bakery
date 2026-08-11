@@ -84,3 +84,11 @@ It provides:
 - Cake information storage
 - Promo code management
 - Review data management
+
+## System Capabilities
+
+The Live Bakery system supports both customer and administrative operations.
+
+Customers can complete the full ordering process from browsing cakes to checkout.
+
+Administrators can manage cakes, orders, promotional codes, and other bakery-related information through the admin interface.
