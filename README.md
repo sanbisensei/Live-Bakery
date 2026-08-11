@@ -59,3 +59,14 @@ Customers can browse available cakes, create accounts, place orders, use promoti
 - Manage cake availability
 - Manage promotional codes
 - Activate or deactivate promo codes
+
+## Frontend Technologies
+
+### Next.js
+Next.js is used as the main framework for building the Live Bakery web application.
+
+### TypeScript
+TypeScript is used to provide type safety and improve code maintainability.
+
+### Tailwind CSS
+Tailwind CSS is used for styling and creating the user interface.
