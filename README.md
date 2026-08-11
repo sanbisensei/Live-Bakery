@@ -39,3 +39,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Live Bakery is a web-based bakery ordering system designed to make cake ordering simple and convenient.
 
 Customers can browse available cakes, create accounts, place orders, use promotional codes, and read customer reviews.
+
+## Customer Features
+
+- User registration
+- User login
+- Browse available cakes
+- Add cakes to shopping cart
+- Update cart quantity
+- Checkout and place orders
+- Apply promotional codes
+- View customer reviews
