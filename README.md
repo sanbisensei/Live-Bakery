@@ -39,3 +39,56 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Live Bakery is a web-based bakery ordering system designed to make cake ordering simple and convenient.
 
 Customers can browse available cakes, create accounts, place orders, use promotional codes, and read customer reviews.
+
+## Customer Features
+
+- User registration
+- User login
+- Browse available cakes
+- Add cakes to shopping cart
+- Update cart quantity
+- Checkout and place orders
+- Apply promotional codes
+- View customer reviews
+
+## Admin Features
+
+- Manage customer orders
+- Update order status
+- Add and edit cakes
+- Manage cake availability
+- Manage promotional codes
+- Activate or deactivate promo codes
+
+## Frontend Technologies
+
+### Next.js
+Next.js is used as the main framework for building the Live Bakery web application.
+
+### TypeScript
+TypeScript is used to provide type safety and improve code maintainability.
+
+### Tailwind CSS
+Tailwind CSS is used for styling and creating the user interface.
+
+## Backend and Database
+
+### Supabase
+Supabase is used as the backend service for the Live Bakery system.
+
+It provides:
+
+- User authentication
+- Database management
+- Order data storage
+- Cake information storage
+- Promo code management
+- Review data management
+
+## System Capabilities
+
+The Live Bakery system supports both customer and administrative operations.
+
+Customers can complete the full ordering process from browsing cakes to checkout.
+
+Administrators can manage cakes, orders, promotional codes, and other bakery-related information through the admin interface.
