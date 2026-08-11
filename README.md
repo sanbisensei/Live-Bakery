@@ -70,3 +70,17 @@ TypeScript is used to provide type safety and improve code maintainability.
 
 ### Tailwind CSS
 Tailwind CSS is used for styling and creating the user interface.
+
+## Backend and Database
+
+### Supabase
+Supabase is used as the backend service for the Live Bakery system.
+
+It provides:
+
+- User authentication
+- Database management
+- Order data storage
+- Cake information storage
+- Promo code management
+- Review data management
