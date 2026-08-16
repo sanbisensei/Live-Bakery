@@ -48,6 +48,16 @@ Additional tested modules:
 - Admin Blog
 - Custom Cake
 
+### Admin Orders Testing
+
+Admin order tests verify:
+
+- Order loading
+- Empty order state
+- Repository failure handling
+- Local order status updates
+- Cancelled order removal
+
 Run:
 
 ```bash
