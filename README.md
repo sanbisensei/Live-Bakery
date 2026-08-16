@@ -92,3 +92,18 @@ The Live Bakery system supports both customer and administrative operations.
 Customers can complete the full ordering process from browsing cakes to checkout.
 
 Administrators can manage cakes, orders, promotional codes, and other bakery-related information through the admin interface.
+
+## Testing
+
+The Live Bakery project uses Vitest and React Testing Library for automated testing.
+
+The project includes:
+
+- Unit testing
+- Negative testing
+- Integration testing
+
+Run all tests with:
+
+```bash
+npm test
