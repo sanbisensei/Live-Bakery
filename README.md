@@ -107,3 +107,12 @@ Run all tests with:
 
 ```bash
 npm test
+
+## Project Structure
+
+- `src/app` - Application pages and routes
+- `src/components` - Reusable UI components
+- `src/lib` - Repositories and application utilities
+- `tests/unit` - Unit test cases
+- `tests/negative` - Negative test cases
+- `tests/integration` - Integration test cases
