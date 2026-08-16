@@ -42,6 +42,12 @@ Covered examples:
 - Cakes page calculates discounted prices correctly and renders load errors.
 - Reviews page renders review data and repository failures.
 
+Additional tested modules:
+
+- Admin Orders
+- Admin Blog
+- Custom Cake
+
 Run:
 
 ```bash
