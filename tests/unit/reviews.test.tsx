@@ -45,4 +45,40 @@ describe("ReviewsPage - unit tests", () => {
     render(<ReviewsPage />);
     expect(await screen.findByText(/failed to load reviews: reviews unavailable/i)).toBeInTheDocument();
   });
+
+  it("shows empty state when there are no customer reviews", async () => {
+  vi.mocked(ReviewRepository.getAll).mockResolvedValue({
+    data: [],
+    error: null,
+  } as never);
+
+  render(<ReviewsPage />);
+
+  expect(
+    await screen.findByText(/no reviews yet/i),
+  ).toBeInTheDocument();
+});
+
+it("uses customer fallback when profile and cake data are missing", async () => {
+  vi.mocked(ReviewRepository.getAll).mockResolvedValue({
+    data: [
+      {
+        id: "r2",
+        rating: 5,
+        message: "Excellent cake",
+        created_at: "2026-08-11T00:00:00Z",
+        profiles: null,
+        cakes: null,
+      },
+    ],
+    error: null,
+  } as never);
+
+  render(<ReviewsPage />);
+
+  expect(await screen.findByText("Customer")).toBeInTheDocument();
+  expect(screen.getByText("?")).toBeInTheDocument();
+  expect(screen.getByText("★★★★★")).toBeInTheDocument();
+  expect(screen.queryByRole("link")).not.toBeInTheDocument();
+});
 });
