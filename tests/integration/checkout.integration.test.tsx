@@ -126,4 +126,40 @@ describe("Checkout - application integration", () => {
     expect(clearCart).toHaveBeenCalledTimes(1);
     expect(push).toHaveBeenCalledWith("/checkout/success");
   });
+
+  it("updates the grand total when fast delivery is selected", async () => {
+  const user = userEvent.setup();
+
+  vi.mocked(useCart).mockReturnValue({
+    items: [
+      {
+        cakeId: "cake-1",
+        cakeName: "Chocolate Cake",
+        sizeId: "size-1",
+        sizeLabel: "1 lb",
+        quantity: 1,
+        unitPrice: 1000,
+        priceAdd: 0,
+      },
+    ],
+    total: 1000,
+    clearCart: vi.fn(),
+    removeItem: vi.fn(),
+    updateQuantity: vi.fn(),
+  } as never);
+
+  vi.mocked(useRouter).mockReturnValue({
+    push: vi.fn(),
+  } as never);
+
+  render(<CheckoutPage />);
+
+  expect(screen.getByText("৳1080")).toBeInTheDocument();
+
+  await user.click(
+    screen.getByRole("button", { name: /fast delivery/i }),
+  );
+
+  expect(screen.getByText("৳1150")).toBeInTheDocument();
+});
 });

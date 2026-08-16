@@ -47,6 +47,42 @@ describe("CakesPage - unit tests", () => {
     expect(screen.getByTestId("price")).toHaveTextContent("900");
     expect(screen.getByTestId("original-price")).toHaveTextContent("1000");
     expect(screen.getByTestId("image-url")).toHaveTextContent("cake.jpg");
+});
+
+it("uses base price when cake has no discount", async () => {
+  vi.mocked(CakeRepository.getAll).mockResolvedValue({
+    data: [
+      {
+        id: "cake-2",
+        slug: "vanilla-cake",
+        name: "Vanilla Cake",
+        base_price: 750,
+        discount_pct: 0,
+        cake_images: [],
+      },
+    ],
+    error: null,
+  } as never);
+
+  render(await CakesPage());
+
+  expect(screen.getByText("Vanilla Cake")).toBeInTheDocument();
+  expect(screen.getByTestId("price")).toHaveTextContent("750");
+  expect(screen.getByTestId("original-price")).toHaveTextContent("none");
+});
+
+it("shows empty state when no cakes are available", async () => {
+  vi.mocked(CakeRepository.getAll).mockResolvedValue({
+    data: [],
+    error: null,
+  } as never);
+
+  render(await CakesPage());
+
+  expect(
+    screen.getByText(/no cakes available right now/i),
+  ).toBeInTheDocument();
+});
   });
 
   it("renders a safe error state when cake loading fails", async () => {
@@ -58,4 +94,3 @@ describe("CakesPage - unit tests", () => {
     render(await CakesPage());
     expect(screen.getByText(/failed to load cakes/i)).toBeInTheDocument();
   });
-});
