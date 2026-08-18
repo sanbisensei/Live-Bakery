@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { BlogRepository } from "@/lib/repositories/blogRepository";
 import Link from "next/link";
 

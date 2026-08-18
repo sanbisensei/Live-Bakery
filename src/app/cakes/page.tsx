@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { CakeRepository } from "@/lib/repositories/cakeRepository";
 import CakeCard from "@/components/ui/CakeCard";
 
