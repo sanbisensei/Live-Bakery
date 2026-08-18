@@ -33,7 +33,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-6 py-12">
+    <div className="min-h-[78vh] flex items-center justify-center px-6 py-12">
       <div className="bg-white border border-beige-border rounded-2xl p-8 w-full max-w-sm">
         <h1 className="font-display text-2xl text-cocoa mb-1">
           Create your account
